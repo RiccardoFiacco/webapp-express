@@ -37,4 +37,17 @@ function existsId(req, res, next){
     next();
 }
 
-module.exports = {errorsHandler, notFound, existsId }
+function checkInput(req, res, next){
+    const { title, director, genre, release_year, abstract, image } = req.body
+
+    if( !title || !director || !genre || !release_year || !abstract || !image){
+        res.status(500).json({
+            error: 'invalid request',
+            message: 'dati incompleti',
+    })
+    }
+
+    next();
+}
+
+module.exports = {errorsHandler, notFound, existsId, checkInput }
