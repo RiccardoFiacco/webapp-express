@@ -41,7 +41,7 @@ function checkInput(req, res, next){
     const { title, director, genre, release_year, abstract, image } = req.body
 
     if( !title || !director || !genre || !release_year || !abstract || !image){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'invalid request',
             message: 'dati incompleti',
     })

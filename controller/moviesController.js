@@ -47,4 +47,16 @@ function store(req, res){
     })
 }
 
-module.exports = {index, show, store}
+function remove(req, res){
+    const id = req.params.id
+    const query = `DELETE FROM movies WHERE id=?`;
+
+    connection.query(query, [id], (err, results)=>{
+        if(err){
+            return results.status(500).json({ error: 'Database query failed' });
+        }
+        res.send("eliminazione andata a buon fine")
+    })
+}
+
+module.exports = {index, show, store, remove}
