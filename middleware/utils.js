@@ -11,6 +11,12 @@ function existsId(req, res, next){
         if(err){
             return results.status(500).json({ error: 'Database query failed' });
         }
+        if(results.length === 0) {
+            return res.status(404).json({
+                    error: 'Not Found',
+                    message: 'movie not found',
+            })
+        }
     })
 
     next();
