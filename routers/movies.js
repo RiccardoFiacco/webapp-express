@@ -6,5 +6,6 @@ const { existsId } = require('../middleware/utils.js');
 router.get('/', moviesController.index);
 //show
 router.get('/:id', existsId, moviesController.show);
-
+//store
+router.post('/',  moviesController.store);
 module.exports = router
