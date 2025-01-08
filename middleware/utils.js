@@ -1,5 +1,20 @@
 const connection = require('../db.js')
 
+//funzione gestione degli errori
+function errorsHandler(err, _, res) {
+	res.status(500).json({
+		message: err.message,
+	})
+}
+
+//funzione gestione delle rotte non trovate
+function notFound(req, res) {
+	res.status(404).json({
+		error: 'Not found',
+		message: 'Pagina non trovata',
+	})
+} 
+//funzione che vede se esiste l'id
 function existsId(req, res, next){
     const id =  req.params.id
     const query = `
@@ -22,4 +37,4 @@ function existsId(req, res, next){
     next();
 }
 
-module.exports = {existsId}
+module.exports = {errorsHandler, notFound, existsId }
