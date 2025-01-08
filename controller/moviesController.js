@@ -32,5 +32,19 @@ function show(req, res){
         })
     })
 }
+function store(req, res){
+    const {title, director, genre, release_year, abstract, image} = req.body;
 
-module.exports = {index, show}
+    const query = `
+    INSERT INTO movies (title, director, genre, release_year, abstract, image) VALUES
+    (?, ?, ?, ?, ?, ?)`;
+
+    connection.query(query, [title, director, genre, release_year, abstract, image], (err, results)=>{
+        if(err){
+            return results.status(500).json({ error: 'Database query failed' });
+        }
+        res.send("inserimento andato a buon fine")
+    })
+}
+
+module.exports = {index, show, store}
