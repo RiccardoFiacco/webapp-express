@@ -6,7 +6,7 @@ function index (req, res){
     if(req.query.title){
         query+= `WHERE title LIKE '%${req.query.title}%'`
     }
-
+    
     connection.query(query, (err, result)=>{
         if(err) res.status(500).json({errore: 'query fallita'})
         
