@@ -9,6 +9,7 @@ function index (req, res){
 
     connection.query(query, (err, result)=>{
         if(err) res.status(500).json({errore: 'query fallita'})
+        
         res.json(result)
     })
 }
