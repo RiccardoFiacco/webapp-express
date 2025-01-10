@@ -4,14 +4,14 @@ function index (req, res){
     let  query= `SELECT movies.*, AVG(vote) AS avg_vote 
                  FROM movies
                  JOIN reviews
-                 ON movies.id = reviews.movie_id`
-
+                 ON movies.id = reviews.movie_id `
+    
     if(req.query.title){
         query+= `WHERE title LIKE '%${req.query.title}%'`
     }
     
     query+= ` GROUP BY movies.id`
-
+    
     connection.query(query, (err, result)=>{
         if(err) res.status(500).json({errore: 'query fallita'})
         
