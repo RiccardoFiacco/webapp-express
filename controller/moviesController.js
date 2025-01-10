@@ -1,12 +1,17 @@
 const connection = require('../db')
 
 function index (req, res){
-    let  query= 'SELECT * FROM movies '
+    let  query= `SELECT movies.*, AVG(vote) AS avg_vote 
+                 FROM movies
+                 JOIN reviews
+                 ON movies.id = reviews.movie_id`
 
     if(req.query.title){
         query+= `WHERE title LIKE '%${req.query.title}%'`
     }
     
+    query+= ` GROUP BY movies.id`
+
     connection.query(query, (err, result)=>{
         if(err) res.status(500).json({errore: 'query fallita'})
         
@@ -16,7 +21,12 @@ function index (req, res){
 
 function show(req, res){
     const id = req.params.id
-    let  query= 'SELECT * FROM movies WHERE id = ?'
+    let  query= `SELECT movies.*, AVG(vote) AS avg_vote 
+                 FROM movies
+                 JOIN reviews
+                 ON movies.id = reviews.movie_id
+                 WHERE movies.id = ?
+                 GROUP BY movies.id`
 
     connection.query(query, [id], (err, result)=>{
         if(err) res.status(500).json({errore: 'query fallita'})
