@@ -49,5 +49,15 @@ function checkInput(req, res, next){
 
     next();
 }
+function checkInputReviews(req, res, next){
+    const { movie_id, name, vote, text} = req.body
+    if( !movie_id || !name || !vote || !text){
+        return res.status(500).json({
+            error: 'invalid request',
+            message: 'dati incompleti',
+        })
+    }
 
-module.exports = {errorsHandler, notFound, existsId, checkInput }
+    next();
+}
+module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews }
