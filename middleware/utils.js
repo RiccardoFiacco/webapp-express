@@ -51,7 +51,7 @@ function checkInput(req, res, next){
 }
 function checkInputReviews(req, res, next){
     const { movie_id, name, vote, text} = req.body
-
+    req.body.vote = parseInt(vote)
     if( !movie_id || !name || !vote || !text){
         return res.status(500).json({
             error: 'invalid request',
@@ -63,7 +63,7 @@ function checkInputReviews(req, res, next){
 }
 function checkValueInputReviews(req, res, next){
     const { name, vote} = req.body
-    
+    req.body.vote = parseInt(vote)
     if( isNaN(vote)||(vote > 5 || vote < 0)|| name.length > 255 || typeof name!== 'string'){
         return res.status(500).json({
             error: 'invalid request',

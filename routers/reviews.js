@@ -5,5 +5,6 @@ const { checkInputReviews, checkValueInputReviews, trimString} = require('../mid
 
 //store
 router.post('/', trimString, checkInputReviews, checkValueInputReviews,  reviewsController.store);
-
+//remove
+router.delete('/:id', reviewsController.remove)
 module.exports = router
