@@ -60,4 +60,16 @@ function checkInputReviews(req, res, next){
 
     next();
 }
-module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews }
+function checkValueInputReviews(req, res, next){
+    const { name, vote} = req.body
+    
+    if( (vote > 5 || vote < 0)|| name.length > 255){
+        return res.status(500).json({
+            error: 'invalid request',
+            message: 'dati non corretti',
+        })
+    }
+
+    next();
+}
+module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews}
