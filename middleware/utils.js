@@ -51,6 +51,7 @@ function checkInput(req, res, next){
 }
 function checkInputReviews(req, res, next){
     const { movie_id, name, vote, text} = req.body
+
     if( !movie_id || !name || !vote || !text){
         return res.status(500).json({
             error: 'invalid request',
@@ -72,4 +73,12 @@ function checkValueInputReviews(req, res, next){
 
     next();
 }
-module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews}
+
+function trimString(req, res, next){
+    const {name, text} = req.body
+    req.body.name = name.trim();
+    req.body.text = text.trim();
+    
+    next();
+}
+module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews,trimString}
