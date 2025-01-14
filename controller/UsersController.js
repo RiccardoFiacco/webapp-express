@@ -13,15 +13,21 @@ function index (req, res){
 function store(req, res){
     const {email, password} = req.body;
 
+    let  query= `SELECT *
+                 FROM users`
 
-
-    const query = `INSERT INTO users (email, password) VALUES (?, ?)`;
-    connection.query(query, [title, director, genre, release_year, abstract, image], (err, results)=>{
+    connection.query(query, (err, results)=>{
         if(err){
             return results.status(500).json({ error: 'Database query failed' });
         }
-        res.send("inserimento andato a buon fine")
-    })
+
+        results.forEach(user => {
+          if(user.email == email ){
+             return res.send({ error: 'email gia pesente' });
+          }  
+         })
+    });
+        //const query = `INSERT INTO users (email, password) VALUES (?, ?)`;       
 }
 
 module.exports = { index, store }
