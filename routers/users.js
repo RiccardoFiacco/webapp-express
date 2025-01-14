@@ -1,12 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const userController = require('../controller/userController.js');
+const usersRouter = require('../controller/usersController.js') 
 const { checkInputReviews, checkValueInputReviews, trimString} = require('../middleware/utils.js');
 
 //index
-router.get('/', (req, res)=> {
-    console.log(req.body)
-    res.send("get degli user")
-});
+router.get('/', moviesController.index);
 
 module.exports = router
