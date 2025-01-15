@@ -4,7 +4,9 @@ const usersRouter = require('../controller/usersController.js')
 const { checkInputReviews, checkValueInputReviews, trimString} = require('../middleware/utils.js');
 
 //index
-router.get('/', usersRouter.index);
+router.get('/login', usersRouter.index);
 //post
-router.post('/prova', usersRouter.store);
+router.post('/registration', usersRouter.store);
+
+
 module.exports = router
