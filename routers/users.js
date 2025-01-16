@@ -1,12 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const usersRouter = require('../controller/usersController.js') 
-const { checkInputReviews, checkValueInputReviews, trimString} = require('../middleware/utils.js');
+const usersController = require('../controller/usersController.js')
 
 //index
-router.get('/login', usersRouter.index);
+router.post('/login', usersController.index);
 //post
-router.post('/registration', usersRouter.store);
+router.post('/registration', usersController.store);
 
 
 module.exports = router

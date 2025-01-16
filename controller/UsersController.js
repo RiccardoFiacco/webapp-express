@@ -1,19 +1,20 @@
 const connection = require('../db')
-
+const { generateString } = require('../middleware/utils.js');
 function index (req, res){
-    const {email} = req.body;
+    const {email, password} = req.body;
     let  query= `SELECT *
                  FROM users`
     
     connection.query(query, (err, results)=>{
-        if(err) res.status(500).json({errore: 'query fallita'})
+        if(err) return res.status(500).json({errore: 'query fallita'})
 
-        results.forEach(user => {
-          if(user.email == email ){
-             return res.send('utente presente') //potrei tornare oltre al messaggio un valore che simula un cookie
-          }  
-        })
-        res.status(500).json({ error: 'utente non trovato' });
+        const user = results.find(user => user.email === email && user.password === password);
+        if(user){
+            const code = generateString();
+            return res.status(200).json({ loggato: code });
+        }
+
+        res.send('utente non trovato');
     })
 }
 
@@ -28,12 +29,12 @@ function store(req, res){
             return res.status(500).json({ error: 'Database query failed' });
         }
 
-        results.forEach(user => {
-          if(user.email == email ){
-             return res.status(500).json({ error: 'email gia pesente' });
-          }  
-        })
-
+        const isPresent = results.find(user.email == email)
+        
+        if(isPresent){
+           return res.status(500).json({ error: 'email gia pesente' });
+        }  
+       
         const query = `INSERT INTO users (email, password) VALUES (?, ?)`;   
         connection.query(query,[email, password], (err, results)=>{
             if(err){

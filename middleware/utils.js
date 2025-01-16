@@ -81,4 +81,16 @@ function trimString(req, res, next){
     
     next();
 }
-module.exports = {errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews,trimString}
+
+//generator string
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString() {
+    let result = ' ';
+    for ( let i = 0; i < 10; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * 10));
+    }
+
+    return result;
+}
+module.exports = {generateString, errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews,trimString}
