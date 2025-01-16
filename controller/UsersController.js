@@ -11,10 +11,10 @@ function index (req, res){
         const user = results.find(user => user.email === email && user.password === password);
         if(user){
             const code = generateString();
-            return res.status(200).json({ loggato: code });
+            return res.status(200).json({ loggato: true, code: code });
         }
 
-        res.send('utente non trovato');
+        res.json({ loggato: false });
     })
 }
 
