@@ -29,10 +29,10 @@ function store(req, res){
             return res.status(500).json({ error: 'Database query failed' });
         }
 
-        const isPresent = results.find(user.email == email)
+        const isPresent = results.find(user => user.email == email)
         
         if(isPresent){
-           return res.status(500).json({ error: 'email gia pesente' });
+           return res.json({ error: 'email gia pesente' });
         }  
        
         const query = `INSERT INTO users (email, password) VALUES (?, ?)`;   
@@ -40,7 +40,8 @@ function store(req, res){
             if(err){
                 return res.status(500).json({ error: 'Database query failed' });
             } 
-            res.send('inserimento riuscito')
+            const code = generateString();
+            res.status(200).json({ loggato: true, code: code });
         }) 
     });
         
