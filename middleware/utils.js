@@ -105,6 +105,11 @@ function compareHash(raw, hash){
     return bcrypt.compare(raw, hash)
 }
 
+function splitEmail(email){
+  const result = email.split('@');
+  return result[0]
+}
+
 
 module.exports = {
     generateString, 
@@ -116,5 +121,6 @@ module.exports = {
     checkValueInputReviews, 
     trimString, 
     createHash,
-    compareHash
+    compareHash,
+    splitEmail
 }
