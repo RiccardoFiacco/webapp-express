@@ -15,7 +15,7 @@ function index (req, res){
         const user = results.find(user => user.email === email);
 
         if(user && result){
-            return res.status(200).json({loggato: true, code: name});
+            return res.status(200).json({loggato: true, code: name, userEmail: email});
         }
 
         res.json({ loggato: false });
@@ -46,7 +46,7 @@ function store(req, res){
                 return res.status(500).json({ error: 'Database query failed' });
             } 
             const name = splitEmail(email) 
-            res.status(200).json({ loggato: true, code: name });
+            res.status(200).json({ loggato: true, code: name, userEmail: email });
         }) 
     });
         
