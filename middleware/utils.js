@@ -1,5 +1,5 @@
 const connection = require('../db.js')
-
+const bcrypt = require('bcrypt')
 //funzione gestione degli errori
 function errorsHandler(err, _, res, _) {
 	res.status(500).json({
@@ -93,4 +93,28 @@ function generateString() {
 
     return result;
 }
-module.exports = {generateString, errorsHandler, notFound, existsId, checkInput, checkInputReviews, checkValueInputReviews,trimString}
+
+
+
+function createHash(password){
+    const salt =bcrypt.genSaltSync()
+    return bcrypt.hashSync(password, salt)
+}
+function compareHash(raw, hash){
+    
+    return bcrypt.compare(raw, hash)
+}
+
+
+module.exports = {
+    generateString, 
+    errorsHandler, 
+    notFound, 
+    existsId, 
+    checkInput, 
+    checkInputReviews, 
+    checkValueInputReviews, 
+    trimString, 
+    createHash,
+    compareHash
+}
