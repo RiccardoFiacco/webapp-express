@@ -64,11 +64,11 @@ function checkInputReviews(req, res, next){
 
 function checkValueInputReviews(req, res, next){
     const { name, vote} = req.body
-    const regExp = /^[A-Za-zÀ-ÿ']+([ -][A-Za-zÀ-ÿ']+)*$/;
+    console.log(name, vote)
     req.body.vote = parseInt(vote)
 
     if(!isNaN(vote) && (vote < 5 && vote >= 1)){
-        if(regExp.test(name) && name.length < 255 && typeof name === 'string'){
+        if(name.length < 255 && typeof name === 'string'){
             next();
         }else{
             return res.status(500).json({
