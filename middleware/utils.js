@@ -61,18 +61,29 @@ function checkInputReviews(req, res, next){
 
     next();
 }
+
 function checkValueInputReviews(req, res, next){
     const { name, vote} = req.body
+    const regExp = /^[A-Za-zÀ-ÿ']+([ -][A-Za-zÀ-ÿ']+)*$/;
     req.body.vote = parseInt(vote)
-    if( isNaN(vote)||(vote > 5 || vote < 0)|| name.length > 255 || typeof name!== 'string'){
+
+    if(!isNaN(vote) && (vote < 5 && vote >= 1)){
+        if(regExp.test(name) && name.length < 255 && typeof name === 'string'){
+            next();
+        }else{
+            return res.status(500).json({
+                error: 'invalid request',
+                message: 'nome non corretto',
+            })
+        }
+    }else{
         return res.status(500).json({
             error: 'invalid request',
-            message: 'dati non corretti',
+            message: 'voto non corretto',
         })
     }
-
-    next();
 }
+
 
 function trimString(req, res, next){
     const {name, text} = req.body

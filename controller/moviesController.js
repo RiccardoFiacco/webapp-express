@@ -18,37 +18,6 @@ function index (req, res){
         res.json(result)
     })
 }
-// function index(req, res) {
-// 	// recuperiamo l'elenco dei books
-
-// 	let sql = `SELECT movies.*, AVG(vote) AS avg_vote 
-//                  FROM movies
-//                  JOIN reviews
-//                  ON movies.id = reviews.movie_id`
-
-// 	// BONUS: aggiungere eventuali filtri
-// 	if (req.query.search) {
-// 		sql += ` WHERE title LIKE '%${req.query.search}%' OR director LIKE '%${req.query.search}%' OR abstract LIKE '%${req.query.search}%'`
-// 	}
-
-// 	sql += ` GROUP BY movies.id`
-
-// 	// BONUS: aggiungere paginazione
-// 	// BONUS: aggiungere ordinamento
-
-// 	connection.query(sql, (err, books) => {
-// 		// console.log(err)
-// 		if (err) return res.status(500).json({ message: err.message })
-
-// 		// BONUS: se abbiamo l'elenco di libri recuperare la media delle valutazioni di ogni libro
-
-// 		books.forEach((book) => {
-// 			book.image = `${process.env.BE_HOST}/img/books/${book.image}`
-// 		})
-
-// 		res.json(books)
-// 	})
-// }
 
 function show(req, res){
     const id = req.params.id
