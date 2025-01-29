@@ -67,7 +67,7 @@ function checkValueInputReviews(req, res, next){
     console.log(name, vote)
     req.body.vote = parseInt(vote)
 
-    if(!isNaN(vote) && (vote < 5 && vote >= 1)){
+    if(!isNaN(vote) && (vote <= 5 && vote >= 1)){
         if(name.length < 255 && typeof name === 'string'){
             next();
         }else{
