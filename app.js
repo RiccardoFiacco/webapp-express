@@ -9,7 +9,8 @@ const { errorsHandler, notFound } = require('./middleware/utils');
 
 server.use(express.static('public'))
 server.use(express.json())
-server.use(cors({origin:process.env.CORS_ORIGIN}))
+// server.use(cors({origin:process.env.CORS_ORIGIN}))
+server.use(cors({origin:"https://riccardofiacco.github.io"}))
 server.use('/api/movies', moviesRouter)
 server.use('/api/reviews', reviewsRouter)
 server.use('/api/users', userRouter)
