@@ -20,3 +20,5 @@ server.use(notFound)
 server.listen(port,()=>{
     console.log("server in ascolto")
 })
+
+module.exports = server;
